@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostBinding, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-nav-bar',
@@ -7,9 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavBarComponent implements OnInit {
 
+  isOpened: boolean = false;
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  NavStatus(status: boolean) {
+    this.isOpened = status;
   }
 
 }

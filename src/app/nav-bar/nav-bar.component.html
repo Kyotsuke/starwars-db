@@ -1,3 +1,18 @@
-<a routerLink="">LOGO</a>
+<div class="container-fluid navigation text-center">
+    <div class="row">
+        <div class="col-3 menu">
+            <img src="../assets/img/menu.png" alt="Menu" (click)="NavStatus(true)">
+        </div>
+        <div class="col-6 logo">
+            <a routerLink=""><img src="../assets/img/logo.png" alt="Logo"></a>
+        </div>
+    </div>
+</div>
 
-<a routerLink="/categories">Catégories</a>
+
+<div id="menu" class="side_menu" [ngStyle]="{'width': isOpened ? '25vw' : '0', 'border-width': isOpened ? '5px' : '0'}">
+    <a href="javascript:void(0)" class="closebtn" (click)="NavStatus(false)">&times;</a>
+    <a href="/">Index</a>
+    <a href="planning.html">Planning</a>
+    <a href="select.html">Select</a>
+</div>
