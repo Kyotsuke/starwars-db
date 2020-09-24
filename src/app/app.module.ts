@@ -7,6 +7,7 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { FooterComponent } from './footer/footer.component';
 import { CategoryComponent } from './category/category.component';
 import { RessourceComponent } from './ressource/ressource.component';
+import { CategoriesComponent } from './categories/categories.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { RessourceComponent } from './ressource/ressource.component';
     NavBarComponent,
     FooterComponent,
     CategoryComponent,
-    RessourceComponent
+    RessourceComponent,
+    CategoriesComponent
   ],
   imports: [
     BrowserModule,
