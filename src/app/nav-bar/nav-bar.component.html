@@ -12,7 +12,6 @@
 
 <div id="menu" class="side_menu" [ngStyle]="{'width': isOpened ? '25vw' : '0', 'border-width': isOpened ? '5px' : '0'}">
     <a href="javascript:void(0)" class="closebtn" (click)="NavStatus(false)">&times;</a>
-    <a href="/">Index</a>
-    <a href="planning.html">Planning</a>
-    <a href="select.html">Select</a>
+    <a routerLink="" (click)="NavStatus(false)">Index</a>
+    <a routerLink="categories" (click)="NavStatus(false)">Categories</a>
 </div>
