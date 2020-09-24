@@ -1,0 +1,15 @@
+@import 'vars';
+
+.footer{
+    padding: {
+        top: 1.5rem;
+        bottom: 1rem;
+    }
+    color: #fff;
+    background-color: #555;
+    line-height: 1.2rem;
+
+    a{
+        color: $main_color;
+    }
+}
