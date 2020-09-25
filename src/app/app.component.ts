@@ -173,4 +173,32 @@ export class SWAPI {
 
     return vehicles;
   }
+
+  getStarships() {
+    let http = HttpClient;
+    let url = this.api_url + 'starships/';
+    let starships_counts = 0;
+    let starships_pages = 0;
+    let starships = [];
+
+    this.http.get(url).toPromise().then(data => {
+      for (let property in data) {
+        if (property == 'count') {
+          starships_counts = data[property];
+        }
+      }
+
+      for (let index = 1; index <= starships_counts; index++) {
+        this.http.get(url+""+index).toPromise().then(data => {
+          let add_starship = {};
+          add_starship['id'] = index;
+          add_starship['desc'] = data;
+          starships.push(add_starship);
+        },
+        error => {})
+      }
+    })
+
+    return starships;
+  }
 }
