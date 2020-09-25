@@ -91,4 +91,31 @@ export class SWAPI {
 
     return planets;
   }
+
+  getFilms() {
+    let http = HttpClient;
+    let url = this.api_url + 'films/';
+    let films_counts = 0;
+    let films = [];
+
+    this.http.get(url).toPromise().then(data => {
+      for (let property in data) {
+        if (property == 'count') {
+          films_counts = data[property];
+        }
+      }
+
+      for (let index = 1; index <= films_counts; index++) {
+        this.http.get(url+""+index).toPromise().then(data => {
+          let add_film = {};
+          add_film['id'] = index;
+          add_film['desc'] = data;
+          films.push(add_film);
+        },
+        error => {})
+      }
+    })
+
+    return films;
+  }
 }
