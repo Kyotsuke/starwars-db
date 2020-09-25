@@ -37,4 +37,31 @@ export class SWAPI {
 
     return this.categories;
   }
+
+  getPeoples() {
+    let http = HttpClient;
+    let url = this.api_url + 'people/';
+    let peoples_count = 0;
+    let peoples = [];
+
+    this.http.get(url).toPromise().then(data => {
+      for (let property in data) {
+        if (property == 'count') {
+          peoples_count = data[property];
+        }
+      }
+
+      for (let index = 1; index <= peoples_count; index++) {
+        this.http.get(url+""+index).toPromise().then(data => {
+          let add_people = {};
+          add_people['id'] = index;
+          add_people['desc'] = data;
+          peoples.push(add_people);
+        },
+        error => {})
+      }
+    })
+
+    return peoples;
+  }
 }
