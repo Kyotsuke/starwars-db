@@ -16,9 +16,9 @@
 
         <div class="container">
             <div class="row">
-                <div class="col-4 category" *ngFor="let item of items">
-                    <a routerLink="{{item.name}}"><img src="../../assets/img/img_placeholder.jpg" alt="Placeholder"></a>
-                    <h3>{{item.name}}</h3>
+                <div class="col-4 category" *ngFor="let category of categories">
+                    <a routerLink="{{category.name}}"><img src="../../assets/img/img_placeholder.jpg" alt="Placeholder"></a>
+                    <h3>{{category.name}}</h3>
                 </div>
             </div>
         </div>
