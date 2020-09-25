@@ -118,4 +118,31 @@ export class SWAPI {
 
     return films;
   }
+
+  getSpecies() {
+    let http = HttpClient;
+    let url = this.api_url + 'species/';
+    let species_counts = 0;
+    let species = [];
+
+    this.http.get(url).toPromise().then(data => {
+      for (let property in data) {
+        if (property == 'count') {
+          species_counts = data[property];
+        }
+      }
+
+      for (let index = 1; index <= species_counts; index++) {
+        this.http.get(url+""+index).toPromise().then(data => {
+          let add_specie = {};
+          add_specie['id'] = index;
+          add_specie['desc'] = data;
+          species.push(add_specie);
+        },
+        error => {})
+      }
+    })
+
+    return species;
+  }
 }
