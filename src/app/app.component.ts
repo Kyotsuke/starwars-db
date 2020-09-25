@@ -64,4 +64,31 @@ export class SWAPI {
 
     return peoples;
   }
+
+  getPlanets() {
+    let http = HttpClient;
+    let url = this.api_url + 'planets/';
+    let planets_counts = 0;
+    let planets = [];
+
+    this.http.get(url).toPromise().then(data => {
+      for (let property in data) {
+        if (property == 'count') {
+          planets_counts = data[property];
+        }
+      }
+
+      for (let index = 1; index <= planets_counts; index++) {
+        this.http.get(url+""+index).toPromise().then(data => {
+          let add_planet = {};
+          add_planet['id'] = index;
+          add_planet['desc'] = data;
+          planets.push(add_planet);
+        },
+        error => {})
+      }
+    })
+
+    return planets;
+  }
 }
