@@ -145,4 +145,32 @@ export class SWAPI {
 
     return species;
   }
+
+  getVehicles() {
+    let http = HttpClient;
+    let url = this.api_url + 'vehicles/';
+    let vehicles_counts = 0;
+    let vehicles_pages = 0;
+    let vehicles = [];
+
+    this.http.get(url).toPromise().then(data => {
+      for (let property in data) {
+        if (property == 'count') {
+          vehicles_counts = data[property];
+        }
+      }
+
+      for (let index = 1; index <= vehicles_counts; index++) {
+        this.http.get(url+""+index).toPromise().then(data => {
+          let add_vehicle = {};
+          add_vehicle['id'] = index;
+          add_vehicle['desc'] = data;
+          vehicles.push(add_vehicle);
+        },
+        error => {})
+      }
+    })
+
+    return vehicles;
+  }
 }
