@@ -1,0 +1,61 @@
+@import 'vars';
+
+
+.header{
+    background: {
+        image: url('../../assets/img/header_bkg.jpg');
+        size: cover;
+        repeat: no-repeat;
+        position: center;
+    }
+
+    padding: {
+        top: 15rem;
+        bottom: 15rem;
+    }
+
+    h1, h2{
+        -webkit-text-stroke: 1px $main-color;
+        -webkit-text-fill-color: #000;
+    }
+
+    a{
+        -webkit-text-stroke: 1px $main-color;
+        -webkit-text-fill-color: #000;
+        text-decoration: underline;
+    }
+
+    a:hover{
+        -webkit-text-fill-color: $main-color;
+    }
+}
+
+.categories{
+    padding: {
+        top: 2rem;
+        bottom: 2rem;
+    }
+
+    h2{
+        -webkit-text-stroke: 1px $main-color;
+        -webkit-text-fill-color: #000;        
+    }
+
+    .category{
+        margin: {
+            top: 2rem;
+            bottom: 2rem;
+        }
+
+        img{
+            width: 15rem;
+        }
+
+        h3{
+            position: absolute;
+            top: 6rem;
+            left: 25%;
+            right: 25%;
+        }
+    }
+}
