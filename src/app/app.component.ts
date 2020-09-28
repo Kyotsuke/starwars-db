@@ -13,14 +13,16 @@ export class AppComponent {
 
 
 export class SWAPI {
-  api_url = 'https://swapi.dev/api/'
-  categories = [];
+  api_url = 'https://swapi.dev/api/';
   peoples = [];
 
   constructor(private http: HttpClient) {}
 
   getCategories() {
     let http = HttpClient;
+
+    let categories = [];
+
     this.http.get(this.api_url).toPromise().then(data => {
       for (let property in data) {
         let category = {
@@ -30,12 +32,12 @@ export class SWAPI {
         if (data.hasOwnProperty(property)) {
           category.name = property;
           category.url = data[property];
-          this.categories.push(category);
+          categories.push(category);
         }
       }
     })
 
-    return this.categories;
+    return categories;
   }
 
   getPeoples() {
