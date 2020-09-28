@@ -168,22 +168,57 @@ export class SWAPI {
   getFilms() {
     let http = HttpClient;
     let url = this.api_url + 'films/';
-    let films_counts = 0;
+    
+    let films_per_pages = 0;
+    let pages_count = 0;
+    // let films_counts = 0;
+
     let films = [];
 
     this.http.get(url).toPromise().then(data => {
+      // for (let property in data) {
+      //   if (property == 'count') {
+      //     films_counts = data[property];
+      //   }
+      // }
+
+      // for (let index = 1; index <= films_counts; index++) {
+      //   this.http.get(url+""+index).toPromise().then(data => {
+      //     let add_film = {};
+      //     add_film['id'] = index;
+      //     add_film['desc'] = data;
+      //     films.push(add_film);
+      //   },
+      //   error => {})
+      // }
+      
+      for (let property in data) {
+        if (property == 'results') {
+          films_per_pages = data[property].length;
+        }
+      }
+    
       for (let property in data) {
         if (property == 'count') {
-          films_counts = data[property];
+          pages_count = Math.ceil(data[property] / films_per_pages);
         }
       }
 
-      for (let index = 1; index <= films_counts; index++) {
-        this.http.get(url+""+index).toPromise().then(data => {
-          let add_film = {};
-          add_film['id'] = index;
-          add_film['desc'] = data;
-          films.push(add_film);
+      for (let index = 1; index <= pages_count; index++) {
+        this.http.get(url+"?page="+index).toPromise().then(data => {
+          for (let property in data){
+            if (property == 'results') {
+              for (let j = 0; j < data[property].length; j++) {
+                let add_film = {};
+
+                let element = data[property][j];
+                add_film['desc'] = element;
+                add_film['id'] = element['url'].match(/\d+/)[0];
+
+                films.push(add_film);
+              }
+            }          
+          }
         },
         error => {})
       }
