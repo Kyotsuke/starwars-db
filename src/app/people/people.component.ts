@@ -16,10 +16,7 @@ export class PeopleComponent implements OnInit {
 
   swapi = new SWAPI(this.http);
   people_id = parseInt(this.route.snapshot.paramMap.get('id'));
-  people = this.swapi.getPeople(this.people_id);
-  films = [];
-  vehicles = [];
-  starships = []
+  people = this.swapi.getPeople(this.people_id, false);
 
   ngOnInit(): void {
   }
