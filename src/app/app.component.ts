@@ -14,7 +14,6 @@ export class AppComponent {
 
 export class SWAPI {
   api_url = 'https://swapi.dev/api/';
-  peoples = [];
 
   constructor(private http: HttpClient) {}
 
