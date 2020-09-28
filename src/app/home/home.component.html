@@ -17,8 +17,10 @@
         <div class="container">
             <div class="row">
                 <div class="col-4 category" *ngFor="let category of categories">
-                    <a routerLink="{{category.name}}"><img src="../../assets/img/img_placeholder.jpg" alt="Placeholder"></a>
-                    <h3>{{category.name}}</h3>
+                    <a routerLink="{{category.name}}">
+                        <img src="../../assets/img/img_placeholder.jpg" alt="Placeholder">
+                        <h3>{{category.name}}</h3>
+                    </a>
                 </div>
             </div>
         </div>
