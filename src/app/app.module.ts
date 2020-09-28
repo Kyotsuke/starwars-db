@@ -7,9 +7,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { FooterComponent } from './footer/footer.component';
-import { CategoryComponent } from './category/category.component';
-import { RessourceComponent } from './ressource/ressource.component';
-import { CategoriesComponent } from './categories/categories.component';
 import { HomeComponent } from './home/home.component';
 
 @NgModule({
@@ -17,9 +14,6 @@ import { HomeComponent } from './home/home.component';
     AppComponent,
     NavBarComponent,
     FooterComponent,
-    CategoryComponent,
-    RessourceComponent,
-    CategoriesComponent,
     HomeComponent
   ],
   imports: [
