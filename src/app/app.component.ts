@@ -354,23 +354,56 @@ export class SWAPI {
   getStarships() {
     let http = HttpClient;
     let url = this.api_url + 'starships/';
-    let starships_counts = 0;
-    let starships_pages = 0;
+    
+    let starships_per_pages = 0;
+    let pages_count = 0;
+
     let starships = [];
 
     this.http.get(url).toPromise().then(data => {
+      // for (let property in data) {
+      //   if (property == 'count') {
+      //     starships_counts = data[property];
+      //   }
+      // }
+
+      // for (let index = 1; index <= starships_counts; index++) {
+      //   this.http.get(url+""+index).toPromise().then(data => {
+      //     let add_starship = {};
+      //     add_starship['id'] = index;
+      //     add_starship['desc'] = data;
+      //     starships.push(add_starship);
+      //   },
+      //   error => {})
+      // }
+      
+      for (let property in data) {
+        if (property == 'results') {
+          starships_per_pages = data[property].length;
+        }
+      }
+    
       for (let property in data) {
         if (property == 'count') {
-          starships_counts = data[property];
+          pages_count = Math.ceil(data[property] / starships_per_pages);
         }
       }
 
-      for (let index = 1; index <= starships_counts; index++) {
-        this.http.get(url+""+index).toPromise().then(data => {
-          let add_starship = {};
-          add_starship['id'] = index;
-          add_starship['desc'] = data;
-          starships.push(add_starship);
+      for (let index = 1; index <= pages_count; index++) {
+        this.http.get(url+"?page="+index).toPromise().then(data => {
+          for (let property in data){
+            if (property == 'results') {
+              for (let j = 0; j < data[property].length; j++) {
+                let add_starship = {};
+
+                let element = data[property][j];
+                add_starship['desc'] = element;
+                add_starship['id'] = element['url'].match(/\d+/)[0];
+
+                starships.push(add_starship);
+              }
+            }          
+          }
         },
         error => {})
       }
