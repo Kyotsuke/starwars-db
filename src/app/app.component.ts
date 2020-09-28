@@ -43,27 +43,63 @@ export class SWAPI {
   getPeoples() {
     let http = HttpClient;
     let url = this.api_url + 'people/';
-    let peoples_count = 0;
+    
+    let people_per_pages = 0;
+    let pages_count = 0;
+    // let peoples_count = 0;
+    
     let peoples = [];
 
     this.http.get(url).toPromise().then(data => {
+      // for (let property in data) {
+      //   if (property == 'count') {
+      //     peoples_count = data[property];
+      //   }
+      // }
+
+      // for (let index = 1; index <= peoples_count; index++) {
+      //   this.http.get(url+""+index).toPromise().then(data => {
+      //     let add_people = {};
+      //     add_people['id'] = index;
+      //     add_people['desc'] = data;
+      //     peoples.push(add_people);
+      //   },
+      //   error => {})
+      // }
+      
+      for (let property in data) {
+        if (property == 'results') {
+          people_per_pages = data[property].length;
+        }
+      }
+    
       for (let property in data) {
         if (property == 'count') {
-          peoples_count = data[property];
+          pages_count = Math.ceil(data[property] / people_per_pages);
         }
       }
 
-      for (let index = 1; index <= peoples_count; index++) {
-        this.http.get(url+""+index).toPromise().then(data => {
-          let add_people = {};
-          add_people['id'] = index;
-          add_people['desc'] = data;
-          peoples.push(add_people);
+      for (let index = 1; index <= pages_count; index++) {
+        this.http.get(url+"?page="+index).toPromise().then(data => {
+          for (let property in data){
+            if (property == 'results') {
+              for (let j = 0; j < data[property].length; j++) {
+                let add_people = {};
+
+                let element = data[property][j];
+                add_people['desc'] = element;
+                add_people['id'] = element['url'].match(/\d+/)[0];
+
+                peoples.push(add_people);
+              }
+            }          
+          }
         },
         error => {})
       }
+      
     })
-
+    
     return peoples;
   }
 
