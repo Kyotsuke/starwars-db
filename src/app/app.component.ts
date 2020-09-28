@@ -414,7 +414,7 @@ export class SWAPI {
   
 
 
-  getPeople(id: number | string) {
+  getPeople(id: number | string, name: boolean) {
     let http = HttpClient;
     let url = this.api_url + 'people/'+id;
 
@@ -422,32 +422,32 @@ export class SWAPI {
 
     if(typeof id === 'number') {
       this.http.get(url).toPromise().then(data => {
-        this.peopleData(people, data);
+        this.peopleData(people, data, name);
       })
     } else if (typeof id === "string") {
       this.http.get(id).toPromise().then(data => { 
-        this.peopleData(people, data);
+        this.peopleData(people, data, name);
       })
     }
     
     return people;
   }
 
-  peopleData(people, data) {
+  peopleData(people, data, name: boolean) {
     for (const key in data) {
 
       // FETCH HOMEWORLD DATA
-        if (key === "homeworld") {
-          people[key] = this.getPlanet(data[key]);
+        if (key === "homeworld" && name === false) {
+          people[key] = this.getPlanet(data[key], true);
 
       // FETCH FILMS DATA
-        } else if (key === "films") {
+        } else if (key === "films" && name === false) {
           if(data[key].length != 0){
             let films = [];
 
             for (let index = 0; index < data[key].length; index++) {
               const element = data[key][index];
-              let film = this.getFilm(element);
+              let film = this.getFilm(element, true);
               
               films.push(film); 
             }
@@ -458,13 +458,13 @@ export class SWAPI {
         }
 
       // FETCH SPECIES DATA
-        } else if (key === "species") {
+        } else if (key === "species" && name === false) {
           if(data[key].length != 0){
             let species = [];
 
             for (let index = 0; index < data[key].length; index++) {
               const element = data[key][index];
-              let specie = this.getSpecie(element);
+              let specie = this.getSpecie(element, true);
               
               species.push(specie); 
             }
@@ -475,13 +475,13 @@ export class SWAPI {
           }
 
       // FETCH VEHICLES DATA
-        } else if (key === "vehicles") {
+        } else if (key === "vehicles" && name === false) {
           if(data[key].length != 0){
             let vehicles = [];
 
             for (let index = 0; index < data[key].length; index++) {
               const element = data[key][index];
-              let vehicle = this.getVehicle(element);
+              let vehicle = this.getVehicle(element, true);
               
               vehicles.push(vehicle); 
             }
@@ -492,13 +492,13 @@ export class SWAPI {
         }
 
       //FETCH STARSHIPS DATA
-        }  else if (key === "starships") {
+        }  else if (key === "starships" && name === false) {
           if(data[key].length != 0){
             let starships = [];
 
             for (let index = 0; index < data[key].length; index++) {
               const element = data[key][index];
-              let starship = this.getStarship(element);
+              let starship = this.getStarship(element, true);
               
               starships.push(starship); 
             }
@@ -507,7 +507,11 @@ export class SWAPI {
           } else {
             people[key] = 'unknow';
           }
-        } else {
+        } else if (key === "name" && name === true){
+          people[key] = data[key];
+        } else if (key === "url" && name === true){
+          people[key] = data[key];
+        } else if (name === false){
           people[key] = data[key];
         }
       }
@@ -515,7 +519,7 @@ export class SWAPI {
       people['id'] = people['url'].match(/\d+/)[0];
   }
 
-  getPlanet(id: number | string) {
+  getPlanet(id: number | string, name: boolean) {
     let http = HttpClient;
     let url = this.api_url + 'planets/'+id;
 
@@ -523,28 +527,28 @@ export class SWAPI {
 
     if(typeof id === 'number') {
       this.http.get(url).toPromise().then(data => {
-        this.planetData(planet, data);
+        this.planetData(planet, data, name);
       })      
     } else if (typeof id === "string") {
       this.http.get(id).toPromise().then(data => {
-        this.planetData(planet, data);
+        this.planetData(planet, data, name);
       }) 
     }
     
     return planet;
   }
 
-  planetData(planet, data) {
+  planetData(planet, data, name: boolean) {
     for (const key in data) {
 
     // FETCH RESIDENTS DATA
-      if (key === "residents") {
+      if (key === "residents" && name === false) {
         if(data[key].length != 0){
           let residents = [];
 
           for (let index = 0; index < data[key].length; index++) {
             const element = data[key][index];
-            let resident = this.getPeople(element);
+            let resident = this.getPeople(element, true);
             
             residents.push(resident); 
           }
@@ -554,13 +558,13 @@ export class SWAPI {
           planet[key] = 'unknow';
         }
     // FETCH FILMS DATA
-      } else if (key === "films") {
+      } else if (key === "films" && name === false) {
         if(data[key].length != 0){
           let films = [];
 
           for (let index = 0; index < data[key].length; index++) {
             const element = data[key][index];
-            let film = this.getFilm(element);
+            let film = this.getFilm(element, true);
             
             films.push(film); 
           }
@@ -569,7 +573,11 @@ export class SWAPI {
         } else {
           planet[key] = 'unknow';
         }
-      } else {
+      } else if (key === "name" && name === true){
+        planet[key] = data[key];
+      } else if (key === "url" && name === true){
+        planet[key] = data[key];
+      } else if (name === false){
         planet[key] = data[key];
       }
     }
@@ -577,7 +585,7 @@ export class SWAPI {
       planet['id'] = planet['url'].match(/\d+/)[0];
   }
 
-  getFilm(id: number | string) {
+  getFilm(id: number | string, name: boolean) {
     let http = HttpClient;
     let url = this.api_url + 'films/'+id;
 
@@ -585,27 +593,27 @@ export class SWAPI {
 
     if(typeof id === 'number') {
       this.http.get(url).toPromise().then(data => {
-        this.filmData(film, data);
+        this.filmData(film, data, name);
       })      
     } else if (typeof id === "string") {
       this.http.get(id).toPromise().then(data => {
-        this.filmData(film, data);
+        this.filmData(film, data, name);
       })
     }
     
     return film;
   }
 
-  filmData(film, data) {
+  filmData(film, data, name: boolean) {
     for (const key in data) {
       // FETCH CHARACTERS DATA
-        if (key === "characters") {
+        if (key === "characters" && name === false) {
           if(data[key].length != 0){
             let characters = [];
   
             for (let index = 0; index < data[key].length; index++) {
               const element = data[key][index];
-              let character = this.getPeople(element);
+              let character = this.getPeople(element, true);
               
               characters.push(character);
             }
@@ -616,13 +624,13 @@ export class SWAPI {
           }
 
       // FETCH PLANETS DATA
-        } else if (key === "planets") {
+        } else if (key === "planets" && name === false) {
           if(data[key].length != 0){
             let planets = [];
   
             for (let index = 0; index < data[key].length; index++) {
               const element = data[key][index];
-              let planet = this.getPlanet(element);
+              let planet = this.getPlanet(element, true);
               
               planets.push(planet);
             }
@@ -633,13 +641,13 @@ export class SWAPI {
           }
 
       // FETCH SPECIES DATA
-        } else if (key === "species") {
+        } else if (key === "species" && name === false) {
           if(data[key].length != 0){
             let species = [];
 
             for (let index = 0; index < data[key].length; index++) {
               const element = data[key][index];
-              let specie = this.getSpecie(element);
+              let specie = this.getSpecie(element, true);
               
               species.push(specie); 
             }
@@ -650,13 +658,13 @@ export class SWAPI {
           }
 
       // FETCH VEHICLES DATA
-        } else if (key === "vehicles") {
+        } else if (key === "vehicles" && name === false) {
           if(data[key].length != 0){
             let vehicles = [];
 
             for (let index = 0; index < data[key].length; index++) {
               const element = data[key][index];
-              let vehicle = this.getVehicle(element);
+              let vehicle = this.getVehicle(element, true);
               
               vehicles.push(vehicle); 
             }
@@ -667,13 +675,13 @@ export class SWAPI {
         }
 
       //FETCH STARSHIPS DATA
-        }  else if (key === "starships") {
+        }  else if (key === "starships" && name === false) {
           if(data[key].length != 0){
             let starships = [];
 
             for (let index = 0; index < data[key].length; index++) {
               const element = data[key][index];
-              let starship = this.getStarship(element);
+              let starship = this.getStarship(element, true);
               
               starships.push(starship); 
             }
@@ -682,7 +690,12 @@ export class SWAPI {
           } else {
             film[key] = 'unknow';
           }
-        } else {
+        
+        } else if (key === "title" && name === true){
+          film[key] = data[key];
+        } else if (key === "url" && name === true){
+          film[key] = data[key];
+        } else if (name === false){
           film[key] = data[key];
         }
       }
@@ -690,7 +703,7 @@ export class SWAPI {
       film['id'] = film['url'].match(/\d+/)[0];
   }
 
-  getSpecie(id: number | string) {
+  getSpecie(id: number | string, name: boolean) {
     let http = HttpClient;
     let url = this.api_url + 'species/'+id;
 
@@ -698,28 +711,28 @@ export class SWAPI {
 
     if(typeof id === 'number') {
       this.http.get(url).toPromise().then(data => {
-        this.specieData(specie, data);
+        this.specieData(specie, data, name);
       })      
     } else if (typeof id === "string") {
       this.http.get(id).toPromise().then(data => {
-        this.specieData(specie, data);
+        this.specieData(specie, data, name);
       })
     }
     
     return specie;
   }
 
-  specieData(specie, data) {
+  specieData(specie, data, name: boolean) {
     for (const key in data) {
 
     // FETCH RESIDENTS DATA
-      if (key === "people") {
+      if (key === "people" && name === false) {
         if(data[key].length != 0){
           let peoples = [];
 
           for (let index = 0; index < data[key].length; index++) {
             const element = data[key][index];
-            let people = this.getPeople(element);
+            let people = this.getPeople(element, true);
             
             peoples.push(people); 
           }
@@ -729,13 +742,13 @@ export class SWAPI {
           specie[key] = 'unknow';
         }
     // FETCH FILMS DATA
-      } else if (key === "films") {
+      } else if (key === "films" && name === false) {
         if(data[key].length != 0){
           let films = [];
 
           for (let index = 0; index < data[key].length; index++) {
             const element = data[key][index];
-            let film = this.getFilm(element);
+            let film = this.getFilm(element, true);
             
             films.push(film); 
           }
@@ -744,7 +757,12 @@ export class SWAPI {
         } else {
           specie[key] = 'unknow';
         }
-      } else {
+      
+      } else if (key === "name" && name === true){
+        specie[key] = data[key];
+      } else if (key === "url" && name === true){
+        specie[key] = data[key];
+      } else if (name === false){
         specie[key] = data[key];
       }
     }
@@ -752,7 +770,7 @@ export class SWAPI {
       specie['id'] = specie['url'].match(/\d+/)[0];
   }
 
-  getVehicle(id: number | string) {
+  getVehicle(id: number | string, name: boolean) {
     let http = HttpClient;
     let url = this.api_url + 'vehicles/'+id;
 
@@ -760,30 +778,30 @@ export class SWAPI {
 
     if(typeof id === 'number') {
       this.http.get(url).toPromise().then(data => {
-        this.vehicleData(vehicle, data);
+        this.vehicleData(vehicle, data, name);
       })      
     } else if (typeof id === "string") {
       this.http.get(id).toPromise().then(data => {
-        this.vehicleData(vehicle, data);
+        this.vehicleData(vehicle, data, name);
       })
     }
     
     return vehicle;
   }
 
-  vehicleData(vehicle, data) {
+  vehicleData(vehicle, data, name: boolean) {
     for (const key in data) {
 
     // FETCH RESIDENTS DATA
-      if (key === "pilot") {
+      if (key === "pilots" && name === false) {
         if(data[key].length != 0){
           let pilots = [];
 
           for (let index = 0; index < data[key].length; index++) {
             const element = data[key][index];
-            let pilot = this.getPeople(element);
+            let pilot = this.getPeople(element, true);
             
-            pilots.push(pilot); 
+            pilots.push(pilot);
           }
 
           vehicle[key] = pilots;
@@ -791,13 +809,13 @@ export class SWAPI {
           vehicle[key] = 'unknow';
         }
     // FETCH FILMS DATA
-      } else if (key === "films") {
+      } else if (key === "films" && name === false) {
         if(data[key].length != 0){
           let films = [];
 
           for (let index = 0; index < data[key].length; index++) {
             const element = data[key][index];
-            let film = this.getFilm(element);
+            let film = this.getFilm(element, true);
             
             films.push(film); 
           }
@@ -806,7 +824,12 @@ export class SWAPI {
         } else {
           vehicle[key] = 'unknow';
         }
-      } else {
+      
+      } else if (key === "name" && name === true){
+        vehicle[key] = data[key];
+      } else if (key === "url" && name === true){
+        vehicle[key] = data[key];
+      } else if (name === false){
         vehicle[key] = data[key];
       }
     }
@@ -814,7 +837,7 @@ export class SWAPI {
       vehicle['id'] = vehicle['url'].match(/\d+/)[0];
   }
 
-  getStarship(id: number | string) {
+  getStarship(id: number | string, name: boolean) {
     let http = HttpClient;
     let url = this.api_url + 'starships/'+id;
 
@@ -822,28 +845,28 @@ export class SWAPI {
 
     if(typeof id === 'number') {
       this.http.get(url).toPromise().then(data => {
-        this.starshipData(starship, data);
+        this.starshipData(starship, data, name);
       })      
     } else if (typeof id === "string") {
       this.http.get(id).toPromise().then(data => {
-        this.starshipData(starship, data);
+        this.starshipData(starship, data, name);
       })
     }
     
     return starship;
   }
 
-  starshipData(starship, data) {
+  starshipData(starship, data, name: boolean) {
     for (const key in data) {
 
     // FETCH RESIDENTS DATA
-      if (key === "pilot") {
+      if (key === "pilots" && name === false) {
         if(data[key].length != 0){
           let pilots = [];
 
           for (let index = 0; index < data[key].length; index++) {
             const element = data[key][index];
-            let pilot = this.getPeople(element);
+            let pilot = this.getPeople(element, true);
             
             pilots.push(pilot); 
           }
@@ -853,13 +876,13 @@ export class SWAPI {
           starship[key] = 'unknow';
         }
     // FETCH FILMS DATA
-      } else if (key === "films") {
+      } else if (key === "films" && name === false) {
         if(data[key].length != 0){
           let films = [];
 
           for (let index = 0; index < data[key].length; index++) {
             const element = data[key][index];
-            let film = this.getFilm(element);
+            let film = this.getFilm(element, true);
             
             films.push(film); 
           }
@@ -868,7 +891,12 @@ export class SWAPI {
         } else {
           starship[key] = 'unknow';
         }
-      } else {
+      
+      } else if (key === "name" && name === true){
+        starship[key] = data[key];
+      } else if (key === "url" && name === true){
+        starship[key] = data[key];
+      } else if (name === false){
         starship[key] = data[key];
       }
     }
