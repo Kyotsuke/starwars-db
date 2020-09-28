@@ -106,22 +106,57 @@ export class SWAPI {
   getPlanets() {
     let http = HttpClient;
     let url = this.api_url + 'planets/';
-    let planets_counts = 0;
+    
+    let planets_per_pages = 0;
+    let pages_count = 0;
+    // let planets_counts = 0;
+
     let planets = [];
 
     this.http.get(url).toPromise().then(data => {
+      // for (let property in data) {
+      //   if (property == 'count') {
+      //     planets_counts = data[property];
+      //   }
+      // }
+
+      // for (let index = 1; index <= planets_counts; index++) {
+      //   this.http.get(url+""+index).toPromise().then(data => {
+      //     let add_planet = {};
+      //     add_planet['id'] = index;
+      //     add_planet['desc'] = data;
+      //     planets.push(add_planet);
+      //   },
+      //   error => {})
+      // }
+      
+      for (let property in data) {
+        if (property == 'results') {
+          planets_per_pages = data[property].length;
+        }
+      }
+    
       for (let property in data) {
         if (property == 'count') {
-          planets_counts = data[property];
+          pages_count = Math.ceil(data[property] / planets_per_pages);
         }
       }
 
-      for (let index = 1; index <= planets_counts; index++) {
-        this.http.get(url+""+index).toPromise().then(data => {
-          let add_planet = {};
-          add_planet['id'] = index;
-          add_planet['desc'] = data;
-          planets.push(add_planet);
+      for (let index = 1; index <= pages_count; index++) {
+        this.http.get(url+"?page="+index).toPromise().then(data => {
+          for (let property in data){
+            if (property == 'results') {
+              for (let j = 0; j < data[property].length; j++) {
+                let add_planet = {};
+
+                let element = data[property][j];
+                add_planet['desc'] = element;
+                add_planet['id'] = element['url'].match(/\d+/)[0];
+
+                planets.push(add_planet);
+              }
+            }          
+          }
         },
         error => {})
       }
