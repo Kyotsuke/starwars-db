@@ -292,23 +292,57 @@ export class SWAPI {
   getVehicles() {
     let http = HttpClient;
     let url = this.api_url + 'vehicles/';
-    let vehicles_counts = 0;
-    let vehicles_pages = 0;
+    
+    let vehicles_per_pages = 0;
+    let pages_count = 0;
+    // let vehicles_counts = 0;
+
     let vehicles = [];
 
     this.http.get(url).toPromise().then(data => {
+      // for (let property in data) {
+      //   if (property == 'count') {
+      //     vehicles_counts = data[property];
+      //   }
+      // }
+
+      // for (let index = 1; index <= vehicles_counts; index++) {
+      //   this.http.get(url+""+index).toPromise().then(data => {
+      //     let add_vehicle = {};
+      //     add_vehicle['id'] = index;
+      //     add_vehicle['desc'] = data;
+      //     vehicles.push(add_vehicle);
+      //   },
+      //   error => {})
+      // }
+      
+      for (let property in data) {
+        if (property == 'results') {
+          vehicles_per_pages = data[property].length;
+        }
+      }
+    
       for (let property in data) {
         if (property == 'count') {
-          vehicles_counts = data[property];
+          pages_count = Math.ceil(data[property] / vehicles_per_pages);
         }
       }
 
-      for (let index = 1; index <= vehicles_counts; index++) {
-        this.http.get(url+""+index).toPromise().then(data => {
-          let add_vehicle = {};
-          add_vehicle['id'] = index;
-          add_vehicle['desc'] = data;
-          vehicles.push(add_vehicle);
+      for (let index = 1; index <= pages_count; index++) {
+        this.http.get(url+"?page="+index).toPromise().then(data => {
+          for (let property in data){
+            if (property == 'results') {
+              for (let j = 0; j < data[property].length; j++) {
+                let add_vehicle = {};
+
+                let element = data[property][j];
+                add_vehicle['desc'] = element;
+                add_vehicle['id'] = element['url'].match(/\d+/)[0];
+
+                vehicles.push(add_vehicle);
+              }
+            }          
+          }
         },
         error => {})
       }
