@@ -410,4 +410,469 @@ export class SWAPI {
 
     return starships;
   }
+
+  
+
+
+  getPeople(id: number | string) {
+    let http = HttpClient;
+    let url = this.api_url + 'people/'+id;
+
+    let people = {};
+
+    if(typeof id === 'number') {
+      this.http.get(url).toPromise().then(data => {
+        this.peopleData(people, data);
+      })
+    } else if (typeof id === "string") {
+      this.http.get(id).toPromise().then(data => { 
+        this.peopleData(people, data);
+      })
+    }
+    
+    return people;
+  }
+
+  peopleData(people, data) {
+    for (const key in data) {
+
+      // FETCH HOMEWORLD DATA
+        if (key === "homeworld") {
+          people[key] = this.getPlanet(data[key]);
+
+      // FETCH FILMS DATA
+        } else if (key === "films") {
+          if(data[key].length != 0){
+            let films = [];
+
+            for (let index = 0; index < data[key].length; index++) {
+              const element = data[key][index];
+              let film = this.getFilm(element);
+              
+              films.push(film); 
+            }
+
+            people[key] = films;
+        } else {
+          people[key] = 'unknow';
+        }
+
+      // FETCH SPECIES DATA
+        } else if (key === "species") {
+          if(data[key].length != 0){
+            let species = [];
+
+            for (let index = 0; index < data[key].length; index++) {
+              const element = data[key][index];
+              let specie = this.getSpecie(element);
+              
+              species.push(specie); 
+            }
+
+            people[key] = species;
+          } else {
+            people[key] = 'unknow';
+          }
+
+      // FETCH VEHICLES DATA
+        } else if (key === "vehicles") {
+          if(data[key].length != 0){
+            let vehicles = [];
+
+            for (let index = 0; index < data[key].length; index++) {
+              const element = data[key][index];
+              let vehicle = this.getVehicle(element);
+              
+              vehicles.push(vehicle); 
+            }
+
+            people[key] = vehicles;
+        } else {
+          people[key] = 'unknow';
+        }
+
+      //FETCH STARSHIPS DATA
+        }  else if (key === "starships") {
+          if(data[key].length != 0){
+            let starships = [];
+
+            for (let index = 0; index < data[key].length; index++) {
+              const element = data[key][index];
+              let starship = this.getStarship(element);
+              
+              starships.push(starship); 
+            }
+
+            people[key] = starships;
+          } else {
+            people[key] = 'unknow';
+          }
+        } else {
+          people[key] = data[key];
+        }
+      }
+      
+      people['id'] = people['url'].match(/\d+/)[0];
+  }
+
+  getPlanet(id: number | string) {
+    let http = HttpClient;
+    let url = this.api_url + 'planets/'+id;
+
+    let planet = {};
+
+    if(typeof id === 'number') {
+      this.http.get(url).toPromise().then(data => {
+        this.planetData(planet, data);
+      })      
+    } else if (typeof id === "string") {
+      this.http.get(id).toPromise().then(data => {
+        this.planetData(planet, data);
+      }) 
+    }
+    
+    return planet;
+  }
+
+  planetData(planet, data) {
+    for (const key in data) {
+
+    // FETCH RESIDENTS DATA
+      if (key === "residents") {
+        if(data[key].length != 0){
+          let residents = [];
+
+          for (let index = 0; index < data[key].length; index++) {
+            const element = data[key][index];
+            let resident = this.getPeople(element);
+            
+            residents.push(resident); 
+          }
+
+          planet[key] = residents;
+        } else {
+          planet[key] = 'unknow';
+        }
+    // FETCH FILMS DATA
+      } else if (key === "films") {
+        if(data[key].length != 0){
+          let films = [];
+
+          for (let index = 0; index < data[key].length; index++) {
+            const element = data[key][index];
+            let film = this.getFilm(element);
+            
+            films.push(film); 
+          }
+
+          planet[key] = films;
+        } else {
+          planet[key] = 'unknow';
+        }
+      } else {
+        planet[key] = data[key];
+      }
+    }
+
+      planet['id'] = planet['url'].match(/\d+/)[0];
+  }
+
+  getFilm(id: number | string) {
+    let http = HttpClient;
+    let url = this.api_url + 'films/'+id;
+
+    let film = {};
+
+    if(typeof id === 'number') {
+      this.http.get(url).toPromise().then(data => {
+        this.filmData(film, data);
+      })      
+    } else if (typeof id === "string") {
+      this.http.get(id).toPromise().then(data => {
+        this.filmData(film, data);
+      })
+    }
+    
+    return film;
+  }
+
+  filmData(film, data) {
+    for (const key in data) {
+      // FETCH CHARACTERS DATA
+        if (key === "characters") {
+          if(data[key].length != 0){
+            let characters = [];
+  
+            for (let index = 0; index < data[key].length; index++) {
+              const element = data[key][index];
+              let character = this.getPeople(element);
+              
+              characters.push(character);
+            }
+  
+            film[key] = characters;
+          } else {
+            film[key] = 'unknow';
+          }
+
+      // FETCH PLANETS DATA
+        } else if (key === "planets") {
+          if(data[key].length != 0){
+            let planets = [];
+  
+            for (let index = 0; index < data[key].length; index++) {
+              const element = data[key][index];
+              let planet = this.getPlanet(element);
+              
+              planets.push(planet);
+            }
+  
+            film[key] = planets;
+          } else {
+            film[key] = 'unknow';
+          }
+
+      // FETCH SPECIES DATA
+        } else if (key === "species") {
+          if(data[key].length != 0){
+            let species = [];
+
+            for (let index = 0; index < data[key].length; index++) {
+              const element = data[key][index];
+              let specie = this.getSpecie(element);
+              
+              species.push(specie); 
+            }
+
+            film[key] = species;
+          } else {
+            film[key] = 'unknow';
+          }
+
+      // FETCH VEHICLES DATA
+        } else if (key === "vehicles") {
+          if(data[key].length != 0){
+            let vehicles = [];
+
+            for (let index = 0; index < data[key].length; index++) {
+              const element = data[key][index];
+              let vehicle = this.getVehicle(element);
+              
+              vehicles.push(vehicle); 
+            }
+
+            film[key] = vehicles;
+        } else {
+          film[key] = 'unknow';
+        }
+
+      //FETCH STARSHIPS DATA
+        }  else if (key === "starships") {
+          if(data[key].length != 0){
+            let starships = [];
+
+            for (let index = 0; index < data[key].length; index++) {
+              const element = data[key][index];
+              let starship = this.getStarship(element);
+              
+              starships.push(starship); 
+            }
+
+            film[key] = starships;
+          } else {
+            film[key] = 'unknow';
+          }
+        } else {
+          film[key] = data[key];
+        }
+      }
+      
+      film['id'] = film['url'].match(/\d+/)[0];
+  }
+
+  getSpecie(id: number | string) {
+    let http = HttpClient;
+    let url = this.api_url + 'species/'+id;
+
+    let specie = {};
+
+    if(typeof id === 'number') {
+      this.http.get(url).toPromise().then(data => {
+        this.specieData(specie, data);
+      })      
+    } else if (typeof id === "string") {
+      this.http.get(id).toPromise().then(data => {
+        this.specieData(specie, data);
+      })
+    }
+    
+    return specie;
+  }
+
+  specieData(specie, data) {
+    for (const key in data) {
+
+    // FETCH RESIDENTS DATA
+      if (key === "people") {
+        if(data[key].length != 0){
+          let peoples = [];
+
+          for (let index = 0; index < data[key].length; index++) {
+            const element = data[key][index];
+            let people = this.getPeople(element);
+            
+            peoples.push(people); 
+          }
+
+          specie[key] = peoples;
+        } else {
+          specie[key] = 'unknow';
+        }
+    // FETCH FILMS DATA
+      } else if (key === "films") {
+        if(data[key].length != 0){
+          let films = [];
+
+          for (let index = 0; index < data[key].length; index++) {
+            const element = data[key][index];
+            let film = this.getFilm(element);
+            
+            films.push(film); 
+          }
+
+          specie[key] = films;
+        } else {
+          specie[key] = 'unknow';
+        }
+      } else {
+        specie[key] = data[key];
+      }
+    }
+
+      specie['id'] = specie['url'].match(/\d+/)[0];
+  }
+
+  getVehicle(id: number | string) {
+    let http = HttpClient;
+    let url = this.api_url + 'vehicles/'+id;
+
+    let vehicle = {};
+
+    if(typeof id === 'number') {
+      this.http.get(url).toPromise().then(data => {
+        this.vehicleData(vehicle, data);
+      })      
+    } else if (typeof id === "string") {
+      this.http.get(id).toPromise().then(data => {
+        this.vehicleData(vehicle, data);
+      })
+    }
+    
+    return vehicle;
+  }
+
+  vehicleData(vehicle, data) {
+    for (const key in data) {
+
+    // FETCH RESIDENTS DATA
+      if (key === "pilot") {
+        if(data[key].length != 0){
+          let pilots = [];
+
+          for (let index = 0; index < data[key].length; index++) {
+            const element = data[key][index];
+            let pilot = this.getPeople(element);
+            
+            pilots.push(pilot); 
+          }
+
+          vehicle[key] = pilots;
+        } else {
+          vehicle[key] = 'unknow';
+        }
+    // FETCH FILMS DATA
+      } else if (key === "films") {
+        if(data[key].length != 0){
+          let films = [];
+
+          for (let index = 0; index < data[key].length; index++) {
+            const element = data[key][index];
+            let film = this.getFilm(element);
+            
+            films.push(film); 
+          }
+
+          vehicle[key] = films;
+        } else {
+          vehicle[key] = 'unknow';
+        }
+      } else {
+        vehicle[key] = data[key];
+      }
+    }
+
+      vehicle['id'] = vehicle['url'].match(/\d+/)[0];
+  }
+
+  getStarship(id: number | string) {
+    let http = HttpClient;
+    let url = this.api_url + 'starships/'+id;
+
+    let starship = {};
+
+    if(typeof id === 'number') {
+      this.http.get(url).toPromise().then(data => {
+        this.starshipData(starship, data);
+      })      
+    } else if (typeof id === "string") {
+      this.http.get(id).toPromise().then(data => {
+        this.starshipData(starship, data);
+      })
+    }
+    
+    return starship;
+  }
+
+  starshipData(starship, data) {
+    for (const key in data) {
+
+    // FETCH RESIDENTS DATA
+      if (key === "pilot") {
+        if(data[key].length != 0){
+          let pilots = [];
+
+          for (let index = 0; index < data[key].length; index++) {
+            const element = data[key][index];
+            let pilot = this.getPeople(element);
+            
+            pilots.push(pilot); 
+          }
+
+          starship[key] = pilots;
+        } else {
+          starship[key] = 'unknow';
+        }
+    // FETCH FILMS DATA
+      } else if (key === "films") {
+        if(data[key].length != 0){
+          let films = [];
+
+          for (let index = 0; index < data[key].length; index++) {
+            const element = data[key][index];
+            let film = this.getFilm(element);
+            
+            films.push(film); 
+          }
+
+          starship[key] = films;
+        } else {
+          starship[key] = 'unknow';
+        }
+      } else {
+        starship[key] = data[key];
+      }
+    }
+
+      starship['id'] = starship['url'].match(/\d+/)[0];
+  }
 }
