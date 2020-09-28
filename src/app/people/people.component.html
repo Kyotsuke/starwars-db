@@ -1,1 +1,41 @@
-<p>people works!</p>
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h1>{{people['name']}}</h1>
+            <h1 *ngIf="people['homeworld']">{{people['homeworld']['name']}}</h1>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="people['starships'] != 'unknow'">
+    <div *ngFor="let item of people['starships']">
+        <h1>{{item.name}}</h1>
+        <h1>{{item.id}}</h1>
+    </div>
+</div>
+
+<div *ngIf="people['starships'] == 'unknow'">
+    <h1>{{ people['starships'] }}</h1>
+</div>
+
+
+
+
+
+
+
+
+
+
+<!-- {{people['height']}}
+{{people['mass']}}
+{{people['hair_color']}}
+{{people['skin_color']}}
+{{people['eye_color']}}
+{{people['birth_year']}}
+{{people['gender']}}
+{{people['homeworld']}}
+{{people['films']}}
+{{people['species']}}
+{{people['vehicles']}}
+{{people['starships']}} -->
