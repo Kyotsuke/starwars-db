@@ -230,22 +230,57 @@ export class SWAPI {
   getSpecies() {
     let http = HttpClient;
     let url = this.api_url + 'species/';
-    let species_counts = 0;
+    
+    let species_per_pages = 0;
+    let pages_count = 0;
+    // let species_counts = 0;
+
     let species = [];
 
     this.http.get(url).toPromise().then(data => {
+      // for (let property in data) {
+      //   if (property == 'count') {
+      //     species_counts = data[property];
+      //   }
+      // }
+
+      // for (let index = 1; index <= species_counts; index++) {
+      //   this.http.get(url+""+index).toPromise().then(data => {
+      //     let add_specie = {};
+      //     add_specie['id'] = index;
+      //     add_specie['desc'] = data;
+      //     species.push(add_specie);
+      //   },
+      //   error => {})
+      // }
+      
+      for (let property in data) {
+        if (property == 'results') {
+          species_per_pages = data[property].length;
+        }
+      }
+    
       for (let property in data) {
         if (property == 'count') {
-          species_counts = data[property];
+          pages_count = Math.ceil(data[property] / species_per_pages);
         }
       }
 
-      for (let index = 1; index <= species_counts; index++) {
-        this.http.get(url+""+index).toPromise().then(data => {
-          let add_specie = {};
-          add_specie['id'] = index;
-          add_specie['desc'] = data;
-          species.push(add_specie);
+      for (let index = 1; index <= pages_count; index++) {
+        this.http.get(url+"?page="+index).toPromise().then(data => {
+          for (let property in data){
+            if (property == 'results') {
+              for (let j = 0; j < data[property].length; j++) {
+                let add_specie = {};
+
+                let element = data[property][j];
+                add_specie['desc'] = element;
+                add_specie['id'] = element['url'].match(/\d+/)[0];
+
+                species.push(add_specie);
+              }
+            }          
+          }
         },
         error => {})
       }
