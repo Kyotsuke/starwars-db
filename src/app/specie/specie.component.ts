@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+
+import { ActivatedRoute } from '@angular/router/'
+
+import { SWAPI } from '../app.component';
 
 @Component({
   selector: 'app-specie',
@@ -6,10 +11,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./specie.component.scss']
 })
 export class SpecieComponent implements OnInit {
+  constructor(private http: HttpClient, private route: ActivatedRoute) {}
 
-  constructor() { }
+  swapi = new SWAPI(this.http);
+  specie_id = parseInt(this.route.snapshot.paramMap.get('id'));
+  specie = this.swapi.getSpecie(this.specie_id, false);
 
   ngOnInit(): void {
+    console.log(this.specie);
   }
 
 }
