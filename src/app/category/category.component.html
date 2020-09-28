@@ -1,1 +1,16 @@
-<p>category works!</p>
+<div class="container category">
+    <div class="row">
+        <div class="col-12 text-center">
+            <h1>List of {{category_name}}</h1>
+        </div>
+
+        <div class="col-3 element" *ngFor="let element of elements">
+            <a routerLink="{{router.url+'/'+element.id}}">
+                <div>
+                    <h4 *ngIf="router.url != '/films'">{{element.desc.name}}</h4>
+                    <h4 *ngIf="router.url === '/films'">{{element.desc.title}}</h4>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
