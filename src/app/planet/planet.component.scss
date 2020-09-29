@@ -1,0 +1,73 @@
+@import 'vars';
+
+
+.planet{
+    text-align: center;
+
+    .name{
+        padding: {
+            top: 1rem;
+            bottom: 1rem;
+        }
+
+        -webkit-text-stroke: 1px $main-color;
+        -webkit-text-fill-color: #000;
+    }
+
+    .property{
+        text-align: right;
+        -webkit-text-stroke: 1px #000;
+        -webkit-text-fill-color: $main-color;
+        text-decoration: underline;
+    }
+
+    .value{
+        text-transform: capitalize;
+        text-align: left;
+        -webkit-text-stroke: 1px $main-color;
+        -webkit-text-fill-color: #000;
+
+        a{
+            text-align: left;
+            -webkit-text-stroke: 1px $main-color;
+            -webkit-text-fill-color: $main-color;
+            text-decoration: underline;
+        }
+    
+        a:hover{
+            -webkit-text-fill-color: #000;
+        }
+    }
+
+    .residents{
+        padding: {
+            top: 1rem;
+            bottom: 1rem;
+        }
+        margin: {
+            top: 2rem;
+            bottom: 2rem;
+        }
+        border: {
+            top: {
+                width: 2px;
+                style: solid;
+                color: $main-color;
+            }
+            bottom: {
+                width: 2px;
+                style: solid;
+                color: $main-color;
+            }
+        }
+    }
+
+    .films{
+        padding: {
+            bottom: 1rem;
+        }
+        margin: {
+            bottom: 2rem;
+        }
+    }
+}

@@ -1,19 +1,145 @@
-<div class="container">
+<div class="container-fluid planet">
     <div class="row">
-        <div class="col-12">
+        <div class="col-12 name">
             <h1>{{planet['name']}}</h1>
         </div>
     </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="row">
+                <div class="col-4">
+                    <div class="row">
+                        <div class="col-6 property">
+                            <h2>Climate :</h2>
+                        </div>
+                        <div class="col-6 value">
+                            <h2>{{planet['climate']}}</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="row">
+                        <div class="col-6 property">
+                            <h2>Diameter :</h2>
+                        </div>
+                        <div class="col-6 value">
+                            <h2>{{planet['diameter']}}</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="row">
+                        <div class="col-6 property">
+                            <h2>Population :</h2>
+                        </div>
+                        <div class="col-6 value">
+                            <h2>{{planet['population']}}</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="row">
+                        <div class="col-6 property">
+                            <h2>Gravity</h2>
+                        </div>
+                        <div class="col-6 value">
+                            <h2>{{planet['gravity']}}</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="row">
+                        <div class="col-6 property">
+                            <h2>Rotation period :</h2>
+                        </div>
+                        <div class="col-6 value">
+                            <h2>{{planet['rotation_period']}} hours</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="row">
+                        <div class="col-6 property">
+                            <h2>Orbital period :</h2>
+                        </div>
+                        <div class="col-6 value">
+                            <h2>{{planet['orbital_period']}} days</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="row">
+                        <div class="col-6 property">
+                            <h2>Surface Water :</h2>
+                        </div>
+                        <div class="col-6 value">
+                            <h2>{{planet['surface_water']}} %</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-8">
+                    <div class="row">
+                        <div class="col-3 property">
+                            <h2>Terrain :</h2>
+                        </div>
+                        <div class="col-9 value">
+                            <h2>{{planet['terrain']}}</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 residents">
+                    <div class="row">
+                        <div class="col-4 property">
+                            <div class="row">
+                                <div class="col-6">
+                                    <dt>
+                                        <h2>Residents :</h2>
+                                    </dt>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 value text-center" *ngIf="planet['residents'] != 'unknow'">
+                            <div class="row">
+                                <div class="col-4" *ngFor="let resident of planet['residents']">
+                                    <h3>
+                                        <a routerLink="/people/{{resident['id']}}">{{resident['name']}}</a>
+                                    </h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 value text-center" *ngIf="planet['residents'] === 'unknow'">
+                            <h3>
+                                {{planet['residents']}}
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 films">
+                    <div class="row">
+                        <div class="col-4 property">
+                            <div class="row">
+                                <div class="col-6">
+                                    <dt>
+                                        <h2>Films :</h2>
+                                    </dt>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 value text-center">
+                            <div class="row">
+                                <div class="col-4" *ngFor="let film of planet['films']">
+                                    <h3>
+                                        <a routerLink="/films/{{film['id']}}">{{film['title']}}</a>
+                                    </h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-
-
-
-
-
-
-
-
-
 
 <!-- {{planet['rotation_period']}}
 {{planet['orbital_period']}}
