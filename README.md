@@ -36,3 +36,9 @@ Open a terminal inside **starwars-db** directory and then write `npm install`
 
 #### 7 - Run our website
 Once you have everything from the previous step, then you just have to type `ng serve` to run the website !
+
+---
+
+## Used Frameworks
+
+[Bootstrap](https://getbootstrap.com/)
