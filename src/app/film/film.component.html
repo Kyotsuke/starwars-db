@@ -1,17 +1,201 @@
-<div class="container">
+<div class="container-fluid film">
     <div class="row">
-        <div class="col-12">
+        <div class="col-12 name">
             <h1>{{film['title']}}</h1>
         </div>
     </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="row">
+                <div class="col-4">
+                    <div class="row">
+                        <div class="col-6 property">
+                            <h2>Episode n° :</h2>
+                        </div>
+                        <div class="col-6 value">
+                            <h2>{{film['episode_id']}}</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="row">
+                        <div class="col-6 property">
+                            <h2>Director :</h2>
+                        </div>
+                        <div class="col-6 value">
+                            <h2>{{film['director']}}</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="row">
+                        <div class="col-6 property">
+                            <h2>Release date :</h2>
+                        </div>
+                        <div class="col-6 value">
+                            <h2>{{film['release_date']}}</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="row">
+                        <div class="col-4 property">
+                            <h2>Producer(s) :</h2>
+                        </div>
+                        <div class="col-6 value">
+                            <h2>{{film['producer']}}</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 crawl">
+                    <div class="row">
+                        <div class="col-2 property">
+                            <h2>Opening crawl :</h2>
+                        </div>
+                        <div class="col-10 value">
+                            <h2>{{film['opening_crawl']}}</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 characters">
+                    <div class="row">
+                        <div class="col-4 property">
+                            <div class="row">
+                                <div class="col-6">
+                                    <dt>
+                                        <h2>Characters :</h2>
+                                    </dt>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 value text-center" *ngIf="film['characters'] != 'unknow'">
+                            <div class="row">
+                                <div class="col-4" *ngFor="let character of film['characters']">
+                                    <h3>
+                                        <a routerLink="/people/{{character['id']}}">{{character['name']}}</a>
+                                    </h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 value text-center" *ngIf="film['characters'] === 'unknow'">
+                            <h3>
+                                {{film['characters']}}
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 planets">
+                    <div class="row">
+                        <div class="col-4 property">
+                            <div class="row">
+                                <div class="col-6">
+                                    <dt>
+                                        <h2>Planets :</h2>
+                                    </dt>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 value text-center" *ngIf="film['planets'] != 'unknow'">
+                            <div class="row">
+                                <div class="col-4" *ngFor="let planet of film['planets']">
+                                    <h3>
+                                        <a routerLink="/planets/{{planet['id']}}">{{planet['name']}}</a>
+                                    </h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 value text-center" *ngIf="film['planets'] === 'unknow'">
+                            <h3>
+                                {{film['planets']}}
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 starships">
+                    <div class="row">
+                        <div class="col-4 property">
+                            <div class="row">
+                                <div class="col-6">
+                                    <dt>
+                                        <h2>Starships :</h2>
+                                    </dt>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 value text-center" *ngIf="film['starships'] != 'unknow'">
+                            <div class="row">
+                                <div class="col-4" *ngFor="let starship of film['starships']">
+                                    <h3>
+                                        <a routerLink="/starships/{{starship['id']}}">{{starship['name']}}</a>
+                                    </h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 value text-center" *ngIf="film['starships'] === 'unknow'">
+                            <h3>
+                                {{film['starships']}}
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 vehicles">
+                    <div class="row">
+                        <div class="col-4 property">
+                            <div class="row">
+                                <div class="col-6">
+                                    <dt>
+                                        <h2>Vehicles :</h2>
+                                    </dt>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 value text-center" *ngIf="film['vehicles'] != 'unknow'">
+                            <div class="row">
+                                <div class="col-4" *ngFor="let vehicle of film['vehicles']">
+                                    <h3>
+                                        <a routerLink="/vehicles/{{vehicle['id']}}">{{vehicle['name']}}</a>
+                                    </h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 value text-center" *ngIf="film['vehicles'] === 'unknow'">
+                            <h3>
+                                {{film['vehicles']}}
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 species">
+                    <div class="row">
+                        <div class="col-4 property">
+                            <div class="row">
+                                <div class="col-6">
+                                    <dt>
+                                        <h2>Species :</h2>
+                                    </dt>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 value text-center" *ngIf="film['species'] != 'unknow'">
+                            <div class="row">
+                                <div class="col-4" *ngFor="let specie of film['species']">
+                                    <h3>
+                                        <a routerLink="/species/{{specie['id']}}">{{specie['name']}}</a>
+                                    </h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 value text-center" *ngIf="film['species'] === 'unknow'">
+                            <h3>
+                                {{film['species']}}
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-
-
-
-
-
-
-
 
 
 
