@@ -1,27 +1,38 @@
-# StarwarsDb
+# Star Wars DB
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.1.3.
+A little library that use [SWAPI](https://swapi.dev/) for his datas.  
 
-## Development server
+On this website you can get a lot of informations about the Star Wars' universe, like Characters, Planets or even Species !  
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+---
 
-## Code scaffolding
+## How to install StarWars BD on your computer
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+#### 1 - **NVM**
+You will need [NVM](https://github.com/nvm-sh/nvm/releases/)
+Open your Terminal and install **NVM** with `curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.36.0/install.sh | bash` or `wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.36.0/install.sh | bash`
+Close & Open Terminal again then check the version of **NVM**, to check if the installation was correctly done, with `nvm --version`
 
-## Build
+#### 2 - **Node.js**
+We need [Node.js](https://nodejs.org/)
+In the same Terminal as before, launch `nvm install node` to get the latest version of **Node.js**
+Close & Open Terminal again then check the version of **Node.js**, to check if the installation was correctly done, with `node --v`
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+#### 3 - **Angular CLI**
+If you want to run our website, you will need [Angular](https://angular.io/)
+To install **Angular**, we just need to type `npm install -g @angular/cli`
+Close & Open Terminal again then check the version of **Angular**, to check if the installation was correctly done, with `ng version`
 
-## Running unit tests
+#### 4 - **Git**
+To clone this repository, you will need to install [Git](https://git-scm.com/)
+The most common command on Linux is `apt-get install git` (Mainly on Debian/Ubuntu), if you're not on Debian/Ubuntu, you can look for you command [HERE](https://git-scm.com/download/linux)
+Close & Open Terminal again then check the version of **Git**, to check if the installation was correctly done, with `git --version`
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+#### 5 - Get **starwars-db** repository
+To get the repository, you only need to use `git clone https://github.com/Kyotsuke/starwars-db.git` wherever you want
 
-## Running end-to-end tests
+#### 6 - Install **node_modules**
+Open a terminal inside **starwars-db** directory and then write `npm install`
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+#### 7 - Run our website
+Once you have everything from the previous step, then you just have to type `ng serve` to run the website !
