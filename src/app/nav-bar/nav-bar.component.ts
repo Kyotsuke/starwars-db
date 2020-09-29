@@ -20,7 +20,6 @@ export class NavBarComponent implements OnInit {
   }
 
   getVal(item) {
-    console.log(item.target.value);
     this.search_value = item.target.value;
   }
 
