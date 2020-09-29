@@ -37,18 +37,27 @@
     transition: 0.5s;
     padding-top: 60px;
     border-right: 5px solid $main_color;
-    
-    a{
+
+    a, p{
+        -webkit-text-stroke: 1px $main-color;
+        -webkit-text-fill-color: #000;
+        text-decoration: underline;
         padding: 8px 8px 8px 32px;
-        text-decoration: none;
-        font-size: 25px;
-        color: #818181;
+        font-size: 2rem;
         display: block;
         transition: 0.3s;
     }
 
+    a:hover{
+        -webkit-text-fill-color: $main-color;
+    }
+
     a:hover {
         color: #f1f1f1;
+    }
+
+    p{
+        text-decoration: none;
     }
     
     .closebtn {
