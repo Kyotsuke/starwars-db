@@ -1,1 +1,22 @@
-<p>search works!</p>
+<div class="container category">
+    <div class="row">
+        <div class="col-12 text-center">
+            <h1>Search : {{search_value}}</h1>
+        </div>
+        <div class="col-12" *ngFor="let cat of search | keyvalue">
+            <div class="row">
+                <div class="col-12 cat_title">
+                    <h2 *ngIf="cat.value.length != 0"><a routerLink="/{{cat.key}}">{{cat.key}}</a></h2>
+                </div>
+                <div class="col-3 element" *ngFor="let item of cat.value">
+                    <a routerLink="/{{cat.key}}/{{item.id}}">
+                        <div>
+                            <h4 *ngIf="cat.key != 'films'">{{item.name}}</h4>
+                            <h4 *ngIf="cat.key === 'films'">{{item.title}}</h4>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
