@@ -1,17 +1,169 @@
-<div class="container">
+<div class="container-fluid vehicle">
     <div class="row">
-        <div class="col-12">
+        <div class="col-12 name">
             <h1>{{vehicle['name']}}</h1>
         </div>
     </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="row">
+                <div class="col-4">
+                    <div class="row">
+                        <div class="col-6 property">
+                            <h2>Vehicle class :</h2>
+                        </div>
+                        <div class="col-6 value">
+                            <h2>{{vehicle['vehicle_class']}}</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="row">
+                        <div class="col-6 property">
+                            <h2>Length :</h2>
+                        </div>
+                        <div class="col-6 value">
+                            <h2>{{vehicle['length']}} meters</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="row">
+                        <div class="col-6 property">
+                            <h2>Max Speed :</h2>
+                        </div>
+                        <div class="col-6 value">
+                            <h2>{{vehicle['max_atmosphering_speed']}}</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="row">
+                        <div class="col-6 property">
+                            <h2>Crew :</h2>
+                        </div>
+                        <div class="col-6 value">
+                            <h2>{{vehicle['crew']}}</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="row">
+                        <div class="col-6 property">
+                            <h2>Passengers :</h2>
+                        </div>
+                        <div class="col-6 value">
+                            <h2>{{vehicle['passengers']}}</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="row">
+                        <div class="col-6 property">
+                            <h2>Cargo capacity :</h2>
+                        </div>
+                        <div class="col-6 value">
+                            <h2>{{vehicle['cargo_capacity']}}</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="row">
+                        <div class="col-6 property">
+                            <h2>Cost in credits :</h2>
+                        </div>
+                        <div class="col-6 value">
+                            <h2>{{vehicle['cost_in_credits']}}</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-8">
+                    <div class="row">
+                        <div class="col-3 property">
+                            <h2>Model :</h2>
+                        </div>
+                        <div class="col-6 value">
+                            <h2>{{vehicle['model']}}</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="row">
+                        <div class="col-6 property">
+                            <h2>Consumables :</h2>
+                        </div>
+                        <div class="col-6 value">
+                            <h2>{{vehicle['consumables']}}</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-8">
+                    <div class="row">
+                        <div class="col-3 property">
+                            <h2>Manufacturer :</h2>
+                        </div>
+                        <div class="col-9 value">
+                            <h2>{{vehicle['manufacturer']}}</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 pilots">
+                    <div class="row">
+                        <div class="col-4 property">
+                            <div class="row">
+                                <div class="col-6">
+                                    <dt>
+                                        <h2>Pilots :</h2>
+                                    </dt>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 value text-center" *ngIf="vehicle['pilots'] != 'unknow'">
+                            <div class="row">
+                                <div class="col-4" *ngFor="let pilot of vehicle['pilots']">
+                                    <h3>
+                                        <a routerLink="/people/{{pilot['id']}}">{{pilot['name']}}</a>
+                                    </h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 value text-center" *ngIf="vehicle['pilots'] === 'unknow'">
+                            <div class="row">
+                                <div class="col-4">
+                                    <h3>
+                                        {{vehicle['pilots']}}
+                                    </h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 films">
+                    <div class="row">
+                        <div class="col-4 property">
+                            <div class="row">
+                                <div class="col-6">
+                                    <dt>
+                                        <h2>Films :</h2>
+                                    </dt>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 value text-center">
+                            <div class="row">
+                                <div class="col-4" *ngFor="let film of vehicle['films']">
+                                    <h3>
+                                        <a routerLink="/films/{{film['id']}}">{{film['title']}}</a>
+                                    </h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-
-
-
-
-
-
-
 
 
 
