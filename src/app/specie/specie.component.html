@@ -1,18 +1,153 @@
-<div class="container">
+<div class="container-fluid specie">
     <div class="row">
-        <div class="col-12">
+        <div class="col-12 name">
             <h1>{{specie['name']}}</h1>
         </div>
     </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="row">
+                <div class="col-4" *ngIf="specie['homeworld']">
+                    <div class="row">
+                        <div class="col-6 property">
+                            <h2>Homeworld :</h2>
+                        </div>
+                        <div class="col-6 value" *ngIf="specie['homeworld'] != 'unknow'">
+                            <h2><a routerLink="/planets/{{specie['homeworld']['id']}}"> {{specie['homeworld']['name']}}</a></h2>
+                        </div>
+                        <div class="col-6 value" *ngIf="specie['homeworld'] === 'unknow'">
+                            <h2>{{specie['homeworld']}}</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="row">
+                        <div class="col-6 property">
+                            <h2>Average lifespan :</h2>
+                        </div>
+                        <div class="col-6 value">
+                            <h2>{{specie['average_lifespan']}} years</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="row">
+                        <div class="col-6 property">
+                            <h2>Language :</h2>
+                        </div>
+                        <div class="col-6 value">
+                            <h2>{{specie['language']}}</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="row">
+                        <div class="col-6 property">
+                            <h2>Classification :</h2>
+                        </div>
+                        <div class="col-6 value">
+                            <h2>{{specie['classification']}}</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="row">
+                        <div class="col-6 property">
+                            <h2>Designation :</h2>
+                        </div>
+                        <div class="col-6 value">
+                            <h2>{{specie['designation']}}</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="row">
+                        <div class="col-6 property">
+                            <h2>Average height :</h2>
+                        </div>
+                        <div class="col-6 value">
+                            <h2>{{specie['average_height']}} cm</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col-2 property">
+                            <h2>Skin colors :</h2>
+                        </div>
+                        <div class="col-10 value">
+                            <h2>{{specie['skin_colors']}}</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col-2 property">
+                            <h2>Hair colors :</h2>
+                        </div>
+                        <div class="col-10 value">
+                            <h2>{{specie['hair_colors']}}</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col-2 property">
+                            <h2>Eye colors :</h2>
+                        </div>
+                        <div class="col-10 value">
+                            <h2>{{specie['eye_colors']}}</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 peoples">
+                    <div class="row">
+                        <div class="col-4 property">
+                            <div class="row">
+                                <div class="col-6">
+                                    <dt>
+                                        <h2>Peoples :</h2>
+                                    </dt>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 value text-center">
+                            <div class="row">
+                                <div class="col-4" *ngFor="let people of specie['people']">
+                                    <h3>
+                                        <a routerLink="/peoples/{{people['id']}}">{{people['name']}}</a>
+                                    </h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 films">
+                    <div class="row">
+                        <div class="col-4 property">
+                            <div class="row">
+                                <div class="col-6">
+                                    <dt>
+                                        <h2>Films :</h2>
+                                    </dt>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 value text-center">
+                            <div class="row">
+                                <div class="col-4" *ngFor="let film of specie['films']">
+                                    <h3>
+                                        <a routerLink="/films/{{film['id']}}">{{film['title']}}</a>
+                                    </h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-
-
-
-
-
-
-
-
 
 
 <!-- {{specie['classification']}}
