@@ -724,9 +724,17 @@ export class SWAPI {
 
   specieData(specie, data, name: boolean) {
     for (const key in data) {
+    // FETCH HOMEWORLD DATA
+      
+    if (key === "homeworld" && name === false) {
+      if(data[key] != null) {
+        specie[key] = this.getPlanet(data[key], true);
+      } else {
+        specie[key] = "unknow";
+      }
 
-    // FETCH RESIDENTS DATA
-      if (key === "people" && name === false) {
+    // FETCH PEOPLE DATA
+      } else if (key === "people" && name === false) {
         if(data[key].length != 0){
           let peoples = [];
 
@@ -750,7 +758,7 @@ export class SWAPI {
             const element = data[key][index];
             let film = this.getFilm(element, true);
             
-            films.push(film); 
+            films.push(film);
           }
 
           specie[key] = films;
