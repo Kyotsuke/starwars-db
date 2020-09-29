@@ -10,6 +10,7 @@ import { FilmComponent } from './film/film.component';
 import { SpecieComponent } from './specie/specie.component';
 import { VehicleComponent } from './vehicle/vehicle.component';
 import { StarshipComponent } from './starship/starship.component';
+import { SearchComponent } from './search/search.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -27,6 +28,8 @@ const routes: Routes = [
   {path: 'species/:id', component: SpecieComponent},
   {path: 'vehicles/:id', component: VehicleComponent},
   {path: 'starships/:id', component: StarshipComponent},
+
+  {path: 'search/:search_value', component: SearchComponent}
 ];
 
 @NgModule({
