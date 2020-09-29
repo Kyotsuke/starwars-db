@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http'; // Enable HttpClient to make HTTP request from our API
 
 @Component({
   selector: 'app-root',
@@ -11,12 +11,15 @@ export class AppComponent {
   title = 'starwars-db';
 }
 
-
+// 
+// MAKE LINK WITH SWAPI AND ALL HIS FUNCTIONS
+//
 export class SWAPI {
   api_url = 'https://swapi.dev/api/';
 
   constructor(private http: HttpClient) {}
 
+  // Return all the categories in SWAPI
   getCategories() {
     let http = HttpClient;
 
@@ -38,7 +41,8 @@ export class SWAPI {
 
     return categories;
   }
-
+  
+  // Return all the peoples in the PEOPLE category of SWAPI
   getPeoples() {
     let http = HttpClient;
     let url = this.api_url + 'people/';
@@ -102,6 +106,7 @@ export class SWAPI {
     return peoples;
   }
 
+  // Return all the planets in the PLANETS category of SWAPI
   getPlanets() {
     let http = HttpClient;
     let url = this.api_url + 'planets/';
@@ -164,6 +169,7 @@ export class SWAPI {
     return planets;
   }
 
+  // Return all the films in the FILMS category of SWAPI
   getFilms() {
     let http = HttpClient;
     let url = this.api_url + 'films/';
@@ -226,6 +232,7 @@ export class SWAPI {
     return films;
   }
 
+  // Return all the species in the SPECIES category of SWAPI
   getSpecies() {
     let http = HttpClient;
     let url = this.api_url + 'species/';
@@ -288,6 +295,7 @@ export class SWAPI {
     return species;
   }
 
+  // Return all the vehicles in the VEHICLES category of SWAPI
   getVehicles() {
     let http = HttpClient;
     let url = this.api_url + 'vehicles/';
@@ -350,6 +358,7 @@ export class SWAPI {
     return vehicles;
   }
 
+  // Return all the starships in the STARSHIPS category of SWAPI
   getStarships() {
     let http = HttpClient;
     let url = this.api_url + 'starships/';
@@ -412,8 +421,9 @@ export class SWAPI {
   }
 
   
-
-
+  // Return the People we want with the selected ID
+  // id: to know wich People we want / name : if we only want name and id (true) or everything (false)
+  //
   getPeople(id: number | string, name: boolean) {
     let http = HttpClient;
     let url = this.api_url + 'people/'+id;
@@ -433,6 +443,9 @@ export class SWAPI {
     return people;
   }
 
+  // 
+  // All the elements we want to GET for getPeople()
+  //
   peopleData(people, data, name: boolean) {
     for (const key in data) {
 
@@ -518,7 +531,10 @@ export class SWAPI {
       
       people['id'] = people['url'].match(/\d+/)[0];
   }
-
+  
+  // Return the Planet we want with the selected ID
+  // id: to know wich Planet we want / name : if we only want name and id (true) or everything (false)
+  //
   getPlanet(id: number | string, name: boolean) {
     let http = HttpClient;
     let url = this.api_url + 'planets/'+id;
@@ -538,6 +554,9 @@ export class SWAPI {
     return planet;
   }
 
+  // 
+  // All the elements we want to GET for getPlanet()
+  //
   planetData(planet, data, name: boolean) {
     for (const key in data) {
 
@@ -584,7 +603,10 @@ export class SWAPI {
 
       planet['id'] = planet['url'].match(/\d+/)[0];
   }
-
+  
+  // Return the Film we want with the selected ID
+  // id: to know wich Film we want / name : if we only want title and id (true) or everything (false)
+  //
   getFilm(id: number | string, name: boolean) {
     let http = HttpClient;
     let url = this.api_url + 'films/'+id;
@@ -604,6 +626,9 @@ export class SWAPI {
     return film;
   }
 
+  // 
+  // All the elements we want to GET for getFilm()
+  //
   filmData(film, data, name: boolean) {
     for (const key in data) {
       // FETCH CHARACTERS DATA
@@ -702,7 +727,10 @@ export class SWAPI {
       
       film['id'] = film['url'].match(/\d+/)[0];
   }
-
+  
+  // Return the Specie we want with the selected ID
+  // id: to know wich Specie we want / name : if we only want name and id (true) or everything (false)
+  //
   getSpecie(id: number | string, name: boolean) {
     let http = HttpClient;
     let url = this.api_url + 'species/'+id;
@@ -722,6 +750,9 @@ export class SWAPI {
     return specie;
   }
 
+  // 
+  // All the elements we want to GET for getSpecie()
+  //
   specieData(specie, data, name: boolean) {
     for (const key in data) {
     // FETCH HOMEWORLD DATA
@@ -777,7 +808,10 @@ export class SWAPI {
 
       specie['id'] = specie['url'].match(/\d+/)[0];
   }
-
+  
+  // Return the Vehicle we want with the selected ID
+  // id: to know wich Vehicle we want / name : if we only want name and id (true) or everything (false)
+  //
   getVehicle(id: number | string, name: boolean) {
     let http = HttpClient;
     let url = this.api_url + 'vehicles/'+id;
@@ -797,6 +831,9 @@ export class SWAPI {
     return vehicle;
   }
 
+  // 
+  // All the elements we want to GET for getVehicle()
+  //
   vehicleData(vehicle, data, name: boolean) {
     for (const key in data) {
 
@@ -844,7 +881,10 @@ export class SWAPI {
 
       vehicle['id'] = vehicle['url'].match(/\d+/)[0];
   }
-
+  
+  // Return the Starship we want with the selected ID
+  // id: to know wich Starship we want / name : if we only want name and id (true) or everything (false)
+  //
   getStarship(id: number | string, name: boolean) {
     let http = HttpClient;
     let url = this.api_url + 'starships/'+id;
@@ -864,6 +904,9 @@ export class SWAPI {
     return starship;
   }
 
+  // 
+  // All the elements we want to GET for getStarship()
+  //
   starshipData(starship, data, name: boolean) {
     for (const key in data) {
 
@@ -910,5 +953,86 @@ export class SWAPI {
     }
 
       starship['id'] = starship['url'].match(/\d+/)[0];
+  }
+
+  search(value: string) {
+    let http = HttpClient;
+    let people_url      = this.api_url + 'people/?search='+value;
+    let planets_url     = this.api_url + 'planets/?search='+value;
+    let films_url       = this.api_url + 'films/?search='+value;
+    let species_url     = this.api_url + 'species/?search='+value;
+    let vehicles_url    = this.api_url + 'vehicles/?search='+value;
+    let starships_url   = this.api_url + 'starships/?search='+value;
+
+    let search = {};
+
+    this.http.get(people_url).toPromise().then(data => {
+      let results = data['results'];
+      let people = [];
+      for (const key in results) {
+        let result = results[key];
+        result['id'] = result['url'].match(/\d+/)[0];
+        people.push(result);
+      }
+      search['people'] = people;
+    })
+
+    this.http.get(planets_url).toPromise().then(data => {
+      let results = data['results'];
+      let planets = [];
+      for (const key in results) {
+        let result = results[key];
+        result['id'] = result['url'].match(/\d+/)[0];
+        planets.push(result);
+      }
+      search['planets'] = planets;
+    })
+
+    this.http.get(films_url).toPromise().then(data => {
+      let results = data['results'];
+      let films = [];
+      for (const key in results) {
+        let result = results[key];
+        result['id'] = result['url'].match(/\d+/)[0];
+        films.push(result);
+      }
+      search['films'] = films;
+    })
+
+    this.http.get(species_url).toPromise().then(data => {
+      let results = data['results'];
+      let species = [];
+      for (const key in results) {
+        let result = results[key];
+        result['id'] = result['url'].match(/\d+/)[0];
+        species.push(result);
+      }
+      search['species'] = species;
+    })
+
+    this.http.get(vehicles_url).toPromise().then(data => {
+      let results = data['results'];
+      let vehicles = [];
+      for (const key in results) {
+        let result = results[key];
+        result['id'] = result['url'].match(/\d+/)[0];
+        vehicles.push(result);
+      }
+      search['vehicles'] = vehicles;
+    })
+
+    this.http.get(starships_url).toPromise().then(data => {
+      let results = data['results'];
+      let starships = [];
+      for (const key in results) {
+        let result = results[key];
+        result['id'] = result['url'].match(/\d+/)[0];
+        starships.push(result);
+      }
+      search['starships'] = starships;
+    })
+
+    return search;
+
   }
 }
