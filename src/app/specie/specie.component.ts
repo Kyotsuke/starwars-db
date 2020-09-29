@@ -18,7 +18,6 @@ export class SpecieComponent implements OnInit {
   specie = this.swapi.getSpecie(this.specie_id, false);
 
   ngOnInit(): void {
-    console.log(this.specie);
   }
 
 }
