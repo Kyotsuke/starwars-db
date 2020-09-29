@@ -7,7 +7,7 @@
             <a routerLink=""><img src="../assets/img/logo.png" alt="Logo"></a>
         </div>
         <div class="col-3 search">
-            <form action="javascript:void(0);">
+            <form action="/search/{{search_value}}">
                 <input type="text" (keyup)=getVal($event)>
                 <input type="submit" value="Search" routerLink='/search/{{search_value}}'>
             </form>
