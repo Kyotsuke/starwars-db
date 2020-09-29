@@ -20,7 +20,47 @@
         img{
             width: 15rem;
         }
-    }        
+    }
+
+    .search {
+        padding: {
+            top: 1.5rem;
+        };
+
+        input[type=text]{
+            -webkit-text-stroke: 1px #000;
+            -webkit-text-fill-color: $main-color;
+            width: 17.5rem;
+            border: {
+                width: 2px;
+                style: solid;
+                color: #000;
+                radius: 0.5rem;
+            };
+            
+            padding: {
+                left: 0.5rem;
+                right: 0.5rem;
+            };
+        }
+
+        input[type=submit]{
+            width: 7.5rem;
+            -webkit-text-stroke: 1px $main-color;
+            -webkit-text-fill-color: #000;
+            background-color: #000;
+            border: {
+                width: 2px;
+                style: solid;
+                color: $main-color;
+                radius: 0.5rem;
+            };
+        }
+
+        *:focus{
+            outline: none;
+        }
+    }
 }
 
 
