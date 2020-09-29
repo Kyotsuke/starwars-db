@@ -15,6 +15,7 @@ import { SpecieComponent } from './specie/specie.component';
 import { VehicleComponent } from './vehicle/vehicle.component';
 import { StarshipComponent } from './starship/starship.component';
 import { CategoryComponent } from './category/category.component';
+import { SearchComponent } from './search/search.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { CategoryComponent } from './category/category.component';
     SpecieComponent,
     VehicleComponent,
     StarshipComponent,
-    CategoryComponent
+    CategoryComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,
